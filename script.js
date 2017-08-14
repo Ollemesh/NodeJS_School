@@ -153,6 +153,11 @@ class Form {
 		});
 	}
 
+	/**
+	 * Генерация строки запроса исходя из переданного объекта данных.
+	 * @param {object} object - объект данных.
+	 * @return {string} строка запроса.
+	 */
 	_serialize(object) {
 		let string = [];
 		for (let prop in object)
@@ -168,7 +173,6 @@ class ResultContainer {
 	/**
 	 * Создание управления resultContainer-ом.
 	 * @param {object} resultContainer - HTMLElement.
-	 * @param {object} classes - объект, содержащий имена css-классов
 	 */
 	constructor(resultContainer) {
 		this.resultContainer = resultContainer;
