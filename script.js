@@ -58,11 +58,6 @@ class Form {
 			}
 		}
 
-		console.log({
-			isValid,
-			errorFields
-		})
-
 		return {
 			isValid,
 			errorFields
@@ -183,7 +178,6 @@ class ResultContainer {
 	 * @param {object} response ответ сервера
 	 */
 	setResultStatus(response) {
-		console.log(response)
 		if (!response) {
 			throw new Error('Response is empty');
 		}
