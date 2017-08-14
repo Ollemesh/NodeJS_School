@@ -146,10 +146,10 @@ class Form {
 				}
 			}
 
-			xhr.open('GET', address);
+			xhr.open('GET', address+'?'+this._serialize(data));
 			xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 			xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-			xhr.send(this._serialize(data));
+			xhr.send();
 		});
 	}
 
