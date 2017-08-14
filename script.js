@@ -1,4 +1,4 @@
-let	maxPhoneNumberSum = 30,
+let maxPhoneNumberSum = 30,
 	inputErrorClass = 'error',
 	myForm, submitButton, resultContainer;
 
