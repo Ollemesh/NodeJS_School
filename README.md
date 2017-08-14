@@ -15,17 +15,16 @@
     я использовал `browser-sync`.
     
     Node.JS должен быть установлен, проверить это можно командой:
-    ```
-        $ node -v
-    ```
-    Если команда не найдена, то следует установить Node.JS ( https://nodejs.org/en/download/ )
+```sh
+    $ node -v
+```
+    Если команда не найдена, то следует установить [Node.JS](https://nodejs.org/en/download/)
 
     Убедившись, что Node.JS установлен, устанавливаем `browser-sync` глобально
-    ```
-        # npm i -g browser-sync
-    ```
-    
+```sh
+    # npm i -g browser-sync
+```
     После установки browser-sync запускаем сервер, для этого необходимо быть в дирректории приложения
-    ```
-        $ browser-sync start --server --files '*'
-    ```
+```
+    $ browser-sync start --server --files '*'
+```
