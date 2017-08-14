@@ -1,9 +1,6 @@
-//Make Post request
-//check comments
-//init all variables
-
 let	maxPhoneNumberSum = 30,
-	inputErrorClass = 'error';
+	inputErrorClass = 'error',
+	myForm, submitButton, resultContainer;
 
 let patterns = {
 	fio: /^((?:\S+\s+){2}\S+)$/i, // Ровно три слова
@@ -12,7 +9,16 @@ let patterns = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+	myForm = document.getElementById('myForm');
+	submitButton = document.getElementById('submitButton');
+	resultContainer = document.getElementById('resultContainer');
+
 	resultContainer = new ResultContainer(resultContainer);
+	/**
+	 * Глобальный Объект MyForm
+	 * @global
+	 * @implements {Form}
+	 */
 	window.MyForm = new Form(myForm);
 
 	myForm.addEventListener('submit', event => {
@@ -154,5 +160,54 @@ class Form {
 				string.push(encodeURIComponent(prop) + "=" + encodeURIComponent(object[prop]));
 			}
 		return string.join("&");
+	}
+}
+
+/** Объект управления resultContainer-ом. */
+class ResultContainer {
+	/**
+	 * Создание управления resultContainer-ом.
+	 * @param {object} resultContainer - HTMLElement.
+	 * @param {object} classes - объект, содержащий имена css-классов
+	 */
+	constructor(resultContainer) {
+		this.resultContainer = resultContainer;
+	}
+
+	/**
+	 * Установка требуемых парметров и контента для resultContainer-а 
+	 * @param {object} response ответ сервера
+	 */
+	setResultStatus(response) {
+		console.log(response)
+		if (!response) {
+			throw new Error('Response is empty');
+		}
+		switch (response.status) {
+			case 'success':
+				this._setSuccess();
+				break;
+			case 'progress':
+				this._setProgress(response.timeout, MyForm);
+				break;
+			case 'error':
+				this._setError(response.reason);
+				break;
+		}
+
+		this.resultContainer.classList.add(response.status);
+	}
+
+	_setSuccess() {
+		this.resultContainer.innerHTML = 'Success';
+	}
+
+	_setProgress(timeout, formObject) {
+		setTimeout(() => {
+			formObject.submit();
+		}, parseInt(timeout));
+	}
+	_setError(errorReason) {
+		this.resultContainer.innerHTML = errorReason;
 	}
 }
